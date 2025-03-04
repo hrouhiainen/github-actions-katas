@@ -75,4 +75,9 @@ jobs:
         path: .
     - name: Execute performance test
       run: bash ci/performance-test.sh
-      
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
