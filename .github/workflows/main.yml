@@ -1,6 +1,11 @@
 name: Main workflow
 on: push
 jobs:
+  Docker-image:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    permissions:
+    packages: write
   Build:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
