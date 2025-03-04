@@ -1,6 +1,10 @@
-#!/bin/bash
-set -e
-[[ -z "${GIT_COMMIT}" ]] && Tag='local' || Tag="${GIT_COMMIT::8}" 
-REPO="ghcr.io/$docker_username/"
-echo "${REPO}"
-docker build -t "${REPO}micronaut-app:latest" -t "${REPO}micronaut-app:1.0-$Tag" app/
+name: Main workflow
+on: push
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    container: gradle:6-jdk11
+    steps:
+      - name: Clone down repository
+        uses: actions/checkout@v4       
+      - run: ci/build-app.sh
