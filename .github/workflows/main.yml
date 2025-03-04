@@ -1,11 +1,6 @@
 name: Main workflow
 on: push
 jobs:
-  Docker-image:
-    runs-on: ubuntu-latest
-    needs: [Build]
-    permissions:
-    packages: write
   Build:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
@@ -33,4 +28,9 @@ jobs:
           DEFAULT_BRANCH: main
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DISABLE_ERRORS: true  
+          DISABLE_ERRORS: true 
+  Docker-image:
+      runs-on: ubuntu-latest
+      needs: [Build]
+      permissions:
+      packages: write
